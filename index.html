@@ -2,22 +2,30 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>Shopping List App</title>
+    <title>Dad Joke Generator</title>
     <link rel="stylesheet" href="main.css">
   </head>
   <body> 
-    <div id="shopping-list">
+    <div id="dad-jokes">
       <h1>{{header || 'Welcome'}}</h1>
+      <ul>
+        <li v-for="(joke, index) in jokes" :key="joke.id">{{index+1}}. {{joke.content}}</li>
+      </ul>
     </div>
     <script src="https://unpkg.com/vue@3"></script>
     <script>
-      const shoppingList = Vue.createApp({
+      const dadJokes = Vue.createApp({
         data(){
           return {
-            header: "Shopping List App"
+            header: "Dad Joke Generator",
+            jokes: [
+              {id: 1, content: "I used to be a baker, but I couldn't make enough dough."},
+              {id: 2, content: "Why don't scientists trust atoms? Because they make up everything!"},
+              {id: 3, content: "Why did the scarecrow win an award? Because he was outstanding in his field!"},
+            ]
           }
         }
-      }).mount('#shopping-list')
+      }).mount('#dad-jokes')
     </script>
   </body>
 </html>

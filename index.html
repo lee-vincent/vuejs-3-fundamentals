@@ -8,13 +8,22 @@
   <body> 
     <div id="dad-jokes">
       <h1>{{header || 'Welcome'}}</h1>
-      <input v-model="newJoke" type="text" placeholder="Add a Dad Joke">
-      <br>
-      <label>
-        <input type="checkbox" v-model="newJokeILoveIt">I Love It
-      </label>
-      <br>
-      {{newJoke}} {{newJokeILoveIt}}
+      <div class="add-joke-form">
+        <input
+          @keyup.enter="jokes.push({id:jokes.length + 1, content: newJoke})"
+          v-model="newJoke"
+          type="text"
+          placeholder="Add a Dad Joke">
+        <label>
+          <input type="checkbox" v-model="newJokeILoveIt">
+          I Love It
+        </label>
+        <button
+          @click="jokes.push({id:jokes.length + 1, content: newJoke})"
+          class="btn btn-primary">
+          Save Joke
+      </button>
+      </div>
       <ul>
         <li v-for="(joke, index) in jokes" :key="joke.id">{{index+1}}. {{joke.content}}</li>
       </ul>

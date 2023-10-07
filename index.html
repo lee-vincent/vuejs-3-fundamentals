@@ -8,6 +8,13 @@
   <body> 
     <div id="dad-jokes">
       <h1>{{header || 'Welcome'}}</h1>
+      <input v-model="newJoke" type="text" placeholder="Add a Dad Joke">
+      <br>
+      <label>
+        <input type="checkbox" v-model="newJokeILoveIt">I Love It
+      </label>
+      <br>
+      {{newJoke}} {{newJokeILoveIt}}
       <ul>
         <li v-for="(joke, index) in jokes" :key="joke.id">{{index+1}}. {{joke.content}}</li>
       </ul>
@@ -17,7 +24,9 @@
       const dadJokes = Vue.createApp({
         data(){
           return {
-            header: "Dad Joke Generator",
+            header: 'Dad Joke Generator',
+            newJoke: '',
+            newJokeILoveIt: false,
             jokes: [
               {id: 1, content: "I used to be a baker, but I couldn't make enough dough."},
               {id: 2, content: "Why don't scientists trust atoms? Because they make up everything!"},

@@ -7,8 +7,16 @@
 	</head>
 	<body>
 		<div id="dad-jokes">
-			<h1>{{header || 'Welcome'}}</h1>
-			<div class="add-joke-form">
+			<div class="header">
+				<h1>{{header || 'Welcome'}}</h1>
+				<button v-if="editing" @click="doEdit(false)" class="btn btn-cancel">
+					Cancel
+				</button>
+				<button v-else @click="doEdit(true)" class="btn btn-primary">
+					Add Joke
+				</button>
+			</div>
+			<div v-if="editing" class="add-joke-form">
 				<input
 					@keyup.enter="saveJoke"
 					v-model="newJoke"
@@ -21,6 +29,8 @@
 				</label>
 				<button @click="saveJoke" class="btn btn-primary">Save Joke</button>
 			</div>
+			<span v-if="jokes.length === 0" style="font-size: 100px">&#128577;</span>
+			<p v-if="jokes.length === 0">No Dad Jokes Yet :(</p>
 			<ul>
 				<li v-for="(joke, index) in jokes" :key="joke.id">
 					{{index+1}}. {{joke.content}}
@@ -33,24 +43,25 @@
 				data() {
 					return {
 						header: "Dad Joke Generator",
+						editing: false,
 						newJoke: "",
 						newJokeILoveIt: false,
 						jokes: [
-							{
-								id: 1,
-								content:
-									"I used to be a baker, but I couldn't make enough dough.",
-							},
-							{
-								id: 2,
-								content:
-									"Why don't scientists trust atoms? Because they make up everything!",
-							},
-							{
-								id: 3,
-								content:
-									"Why did the scarecrow win an award? Because he was outstanding in his field!",
-							},
+							// {
+							// 	id: 1,
+							// 	content:
+							// 		"I used to be a baker, but I couldn't make enough dough.",
+							// },
+							// {
+							// 	id: 2,
+							// 	content:
+							// 		"Why don't scientists trust atoms? Because they make up everything!",
+							// },
+							// {
+							// 	id: 3,
+							// 	content:
+							// 		"Why did the scarecrow win an award? Because he was outstanding in his field!",
+							// },
 						],
 					};
 				},
@@ -61,6 +72,10 @@
 							id: this.jokes.length + 1,
 							content: this.newJoke,
 						});
+						this.newJoke = "";
+					},
+					doEdit(editing) {
+						this.editing = editing;
 						this.newJoke = "";
 					},
 				},

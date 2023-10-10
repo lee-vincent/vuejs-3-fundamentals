@@ -27,7 +27,13 @@
 					<input type="checkbox" v-model="newJokeILoveIt" />
 					I Love It
 				</label>
-				<button @click="saveJoke" class="btn btn-primary">Save Joke</button>
+				<button
+					v-bind:disabled="newJoke.length === 0"
+					@click="saveJoke"
+					class="btn btn-primary"
+				>
+					Save Joke
+				</button>
 			</div>
 			<span v-if="jokes.length === 0" style="font-size: 100px">&#128577;</span>
 			<p v-if="jokes.length === 0">No Dad Jokes Yet :(</p>

@@ -1,49 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <title>Dad Joke Generator</title>
-    <link rel="stylesheet" href="main.css">
-  </head>
-  <body> 
-    <div id="dad-jokes">
-      <h1>{{header || 'Welcome'}}</h1>
-      <div class="add-joke-form">
-        <input
-          @keyup.enter="jokes.push({id:jokes.length + 1, content: newJoke})"
-          v-model="newJoke"
-          type="text"
-          placeholder="Add a Dad Joke">
-        <label>
-          <input type="checkbox" v-model="newJokeILoveIt">
-          I Love It
-        </label>
-        <button
-          @click="jokes.push({id:jokes.length + 1, content: newJoke})"
-          class="btn btn-primary">
-          Save Joke
-      </button>
-      </div>
-      <ul>
-        <li v-for="(joke, index) in jokes" :key="joke.id">{{index+1}}. {{joke.content}}</li>
-      </ul>
-    </div>
-    <script src="https://unpkg.com/vue@3"></script>
-    <script>
-      const dadJokes = Vue.createApp({
-        data(){
-          return {
-            header: 'Dad Joke Generator',
-            newJoke: '',
-            newJokeILoveIt: false,
-            jokes: [
-              {id: 1, content: "I used to be a baker, but I couldn't make enough dough."},
-              {id: 2, content: "Why don't scientists trust atoms? Because they make up everything!"},
-              {id: 3, content: "Why did the scarecrow win an award? Because he was outstanding in his field!"},
-            ]
-          }
-        }
-      }).mount('#dad-jokes')
-    </script>
-  </body>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Dad Joke Generator</title>
+		<link rel="stylesheet" href="main.css" />
+	</head>
+	<body>
+		<div id="dad-jokes">
+			<h1>{{header || 'Welcome'}}</h1>
+			<div class="add-joke-form">
+				<input
+					@keyup.enter="saveJoke"
+					v-model="newJoke"
+					type="text"
+					placeholder="Add a Dad Joke"
+				/>
+				<label>
+					<input type="checkbox" v-model="newJokeILoveIt" />
+					I Love It
+				</label>
+				<button @click="saveJoke" class="btn btn-primary">Save Joke</button>
+			</div>
+			<ul>
+				<li v-for="(joke, index) in jokes" :key="joke.id">
+					{{index+1}}. {{joke.content}}
+				</li>
+			</ul>
+		</div>
+		<script src="https://unpkg.com/vue@3"></script>
+		<script>
+			const dadJokes = Vue.createApp({
+				data() {
+					return {
+						header: "Dad Joke Generator",
+						newJoke: "",
+						newJokeILoveIt: false,
+						jokes: [
+							{
+								id: 1,
+								content:
+									"I used to be a baker, but I couldn't make enough dough.",
+							},
+							{
+								id: 2,
+								content:
+									"Why don't scientists trust atoms? Because they make up everything!",
+							},
+							{
+								id: 3,
+								content:
+									"Why did the scarecrow win an award? Because he was outstanding in his field!",
+							},
+						],
+					};
+				},
+
+				methods: {
+					saveJoke() {
+						this.jokes.push({
+							id: this.jokes.length + 1,
+							content: this.newJoke,
+						});
+						this.newJoke = "";
+					},
+				},
+			}).mount("#dad-jokes");
+		</script>
+	</body>
 </html>

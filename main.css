@@ -17,7 +17,7 @@ body {
   padding-right: 10px;
 }
 
-#shopping-list {
+#dad-jokes {
   background: #fff;
   padding: 2rem;
   margin: 1rem;
@@ -68,8 +68,8 @@ li input {
   margin: 0 0.5rem 0;
 }
 
-#shopping-list > input,
-#shopping-list > select {
+#dad-jokes > input,
+#dad-jokes > select {
   width: 100%;
   border-radius: 3px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
@@ -82,14 +82,14 @@ li input {
   margin: 0.5rem 0;
 }
 
-.add-item-form,
+.add-joke-form,
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.add-item-form input {
+.add-joke-form input {
   width: 70%;
   border-radius: 3px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
@@ -150,8 +150,8 @@ li input {
   color: #8795a1;
 }
 
-.priority {
-  color: #de751f;
+.loved {
+  color: #f60c0c;
 }
 input[type="checkbox"]{
   display: inline !important;

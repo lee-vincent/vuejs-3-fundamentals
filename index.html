@@ -38,7 +38,12 @@
 			<span v-if="jokes.length === 0" style="font-size: 100px">&#128577;</span>
 			<p v-if="jokes.length === 0">No Dad Jokes Yet :(</p>
 			<ul>
-				<li v-for="(joke, index) in jokes" :key="joke.id">
+				<li
+					v-for="(joke, index) in jokes"
+					@click="toggleTold(joke)"
+					:key="joke.id"
+					v-bind:class="{strikeout: joke.told, loved: joke.newJokeILoveIt}"
+				>
 					{{index+1}}. {{joke.content}}
 				</li>
 			</ul>
@@ -53,21 +58,25 @@
 						newJoke: "",
 						newJokeILoveIt: false,
 						jokes: [
-							// {
-							// 	id: 1,
-							// 	content:
-							// 		"I used to be a baker, but I couldn't make enough dough.",
-							// },
-							// {
-							// 	id: 2,
-							// 	content:
-							// 		"Why don't scientists trust atoms? Because they make up everything!",
-							// },
-							// {
-							// 	id: 3,
-							// 	content:
-							// 		"Why did the scarecrow win an award? Because he was outstanding in his field!",
-							// },
+							{
+								id: 1,
+								content:
+									"I used to be a baker, but I couldn't make enough dough.",
+								told: true,
+								newJokeILoveIt: true,
+							},
+							{
+								id: 2,
+								content:
+									"Why don't scientists trust atoms? Because they make up everything!",
+								told: true,
+							},
+							{
+								id: 3,
+								content:
+									"Why did the scarecrow win an award? Because he was outstanding in his field!",
+								told: false,
+							},
 						],
 					};
 				},
@@ -77,12 +86,18 @@
 						this.jokes.push({
 							id: this.jokes.length + 1,
 							content: this.newJoke,
+							newJokeILoveIt: this.newJokeILoveIt,
 						});
 						this.newJoke = "";
+						this.newJokeILoveIt = "";
 					},
 					doEdit(editing) {
 						this.editing = editing;
 						this.newJoke = "";
+						this.newJokeILoveIt = "";
+					},
+					toggleTold(joke) {
+						joke.told = !joke.told;
 					},
 				},
 			}).mount("#dad-jokes");

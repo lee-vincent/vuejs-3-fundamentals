@@ -23,6 +23,7 @@
 					type="text"
 					placeholder="Add a Dad Joke"
 				/>
+				<p class="counter">{{characterCount}}/200</p>
 				<label>
 					<input type="checkbox" v-model="newJokeILoveIt" />
 					I Love It
@@ -39,7 +40,7 @@
 			<p v-if="jokes.length === 0">No Dad Jokes Yet :(</p>
 			<ul>
 				<li
-					v-for="(joke, index) in jokes"
+					v-for="(joke, index) in reversedJokes"
 					@click="toggleTold(joke)"
 					:key="joke.id"
 					v-bind:class="{strikeout: joke.told, loved: joke.newJokeILoveIt}"
@@ -80,7 +81,14 @@
 						],
 					};
 				},
-
+				computed: {
+					characterCount() {
+						return this.newJoke.length;
+					},
+					reversedJokes() {
+						return [...this.jokes].reverse();
+					},
+				},
 				methods: {
 					saveJoke() {
 						this.jokes.push({
